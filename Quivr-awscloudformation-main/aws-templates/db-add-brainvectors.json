@@ -1,0 +1,64 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Adding the Brain Vectors to the Dynamo DB Table",
+    "Resources": {
+        "brainvectors": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "brain_id",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "description",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "max-token",
+                        "AttributeType": "I"
+                    },
+                    {
+                        "AttributeName":"model",
+                        "AttributeType":"I"
+                    },
+                    {
+                        "AttributeName":"name",
+                        "AttributeType":"S"
+                    },
+                    {
+                        "AttributeName":"open-api-key",
+                        "AttributeType":"S"
+
+                    },
+                    {
+                        "AttributeName":"prompt-id",
+                        "AttributeType":"S"
+                    },
+                    {
+                        "AttributeName":"status",
+                        "AttributeType":"S"
+                    },
+                    {
+                        "AttributeName":"temperature",
+                        "AttributeType":"I"
+                    }
+                ],
+                "KeySchema": [
+                    {
+                        "AttributeName": "brain_id",
+                        "KeyType": "HASH"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "1557f6bb-0021-4497-9475-fda822888cee"
+                }
+            },
+            "DependsOn": [
+                "addfilestobrainvectors"
+            ]
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Storing User Prompts",
+    "Resources": {
+        "prompts": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "AttributeDefinitions": [
+                {
+                    "AttributeName": "prompt-id",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "content",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "status",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName":"title",
+                    "AttributeType":"S"
+                }
+            ],
+            "KeySchema": [
+                {
+                    "AttributeName": "prompt-id",
+                    "KeyType": "HASH"
+                }
+            ]},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "7513fda8-97a0-4786-a5bc-c038847e89dd"
+                }
+            }
+        }
+    }
+}

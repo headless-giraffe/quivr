@@ -1,0 +1,71 @@
+{
+            "AWSTemplateFormatVersion": "2010-09-09",
+            "Description": "ECS Creation for Quivr Docker Image",
+            "Parameters": {
+              "ECSClusterName": {
+                "Type": "String",
+                "Description": "Specifies the ECS Cluster Name with which the resources would be associated",
+                "Default": "Quivr_app"
+              },
+              "VpcId": {
+                "Type": "String",
+                "Description": "Optional - Specifies the ID of an existing VPC in which to launch your container instances. If you specify a VPC ID, you must specify a list of existing subnets in that VPC. If you do not specify a VPC ID, a new VPC is created with at least 1 subnet.",
+                "Default": "",
+                "AllowedPattern": "^(?:vpc-[0-9a-f]{8,17}|)$",
+                "ConstraintDescription": "VPC Id must begin with 'vpc-' and have a valid uuid"
+              },
+              "SubnetIds": {
+                "Type": "CommaDelimitedList",
+                "Description": "Optional - Specifies the Comma separated list of existing VPC Subnet Ids where ECS instances will run",
+                "Default": ""
+              }
+            },
+            "Resources": {
+              "ECSCluster": {
+                "Type": "AWS::ECS::Cluster",
+                "Properties": {
+                  "ClusterName": {
+                    "Ref": "ECSClusterName"
+                  },
+                  "CapacityProviders": [
+                    "FARGATE",
+                    "FARGATE_SPOT"
+                  ],
+                  "ClusterSettings": [
+                    {
+                      "Name": "containerInsights",
+                      "Value": "disabled"
+                    }
+                  ],
+                  "Configuration": {
+                    "ExecuteCommandConfiguration": {
+                      "Logging": "DEFAULT"
+                    }
+                  },
+                  "ServiceConnectDefaults": {
+                    "Namespace": "Quivr_app"
+                  },
+                  "Tags": []
+                }
+              }
+            },
+            "Outputs": {
+              "ECSCluster": {
+                "Description": "The created cluster.",
+                "Value": {
+                  "Ref": "ECSCluster"
+                }
+              }
+            },
+"SecurityGroup": {
+    "Type": "AWS::EC2::SecurityGroup",
+    "Description":"Dedicated Security Group for ECS Cluster created",
+    "Properties": {
+        "GroupDescription": "Build a custom security group.",
+        "VpcId": "vpc-b4887cd2",
+        "SecurityGroupEgress": [],
+        "SecurityGroupIngress": [],
+        "GroupName": "sg-quivr-app"
+    }
+}
+}

@@ -1,0 +1,32 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Creation of Dynamo DB Table for adding users into the Quivr App",
+    "Resources": {
+        "addfilestobrainvectors": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "user-id",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "password",
+                        "AttributeType": "S"
+                    }
+                ],
+                "KeySchema": [
+                    {
+                        "AttributeName": "user-id",
+                        "KeyType": "HASH"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "59f96b3a-e787-468f-ba01-65ab831c48f2"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Adding files to the Brain Vectors",
+    "Resources": {
+        "addfilestobrainvectors": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "AttributeDefinitions": [
+                {
+                    "AttributeName": "brain_id",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "file-sha",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "vector-id",
+                    "AttributeType": "S"
+                }
+            ],
+            "KeySchema": [
+                {
+                    "AttributeName": "brain_id",
+                    "KeyType": "HASH"
+                }
+            ]},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "7513fda8-97a0-4786-a5bc-c038847e89dd"
+                }
+            }
+        }
+    }
+}
